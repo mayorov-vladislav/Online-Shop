@@ -13,7 +13,7 @@ class OrderitemQueryset(models.QuerySet):
         return 0 
 
 class Order(models.Model):
-    name = models.ForeignKey(to=User, on_delete=models.SET_DEFAULT, verbose_name='Пользователь', default=None, blank=True, null=True)
+    user = models.ForeignKey(to=User, on_delete=models.SET_DEFAULT, verbose_name='Пользователь', default=None, blank=True, null=True)
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания заказа')
     phone_number = models.CharField(max_length=20, verbose_name='Номер телефона')
     requires_delivery = models.BooleanField(default=False, verbose_name='Требуется доставка')
@@ -28,7 +28,7 @@ class Order(models.Model):
         verbose_name_plural = 'Заказы'
 
     def __str__(self) -> str:
-        return f'Заказ № - {self.pk} | Получатель - {self.user.first_name} {self.last_name}'
+        return f'Заказ № - {self.pk} | Получатель - {self.user.first_name} {self.user.last_name}'
     
 
 class OrderItem(models.Model):
