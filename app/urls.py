@@ -22,8 +22,10 @@ from app import settings
 from rest_framework import routers
 from carts.views import *
 from goods.views import *
+from main import views
 from orders.views import *
 from users.views import *
+
 
 
 # --------------- ROUTER API SETTINGS ---------------
@@ -49,6 +51,7 @@ urlpatterns = [
     path('orders/', include('orders.urls', namespace='orders')),
     path('', include(router.urls))
 ]
+
 
 if settings.DEBUG: 
     urlpatterns += [

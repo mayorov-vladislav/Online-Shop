@@ -21,3 +21,10 @@ def about(request):
     }
 
     return render(request, 'main/about.html', context)
+
+
+def custom_404(request, exception):
+    return render(request, 'templates/404.html', {}, status=404)
+
+def custom_500(request):
+    return render(request, '505.html', status=500)
