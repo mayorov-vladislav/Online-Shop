@@ -6,9 +6,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from carts.models import Cart
-import orders
 from orders.models import Order, OrderItem
 from users.forms import *
+from rest_framework import viewsets
+from .serializers import * 
 
 
 # Create your views here.
@@ -109,3 +110,12 @@ def logout(request):
 
 def users_cart(request):
     return render(request, 'users/users-cart.html')
+
+
+# ---------------- API ----------------
+
+class UserApi(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class =  UserSerializer
+
+# ---------------- API ----------------

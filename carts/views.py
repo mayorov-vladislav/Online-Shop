@@ -1,9 +1,11 @@
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
+from rest_framework import viewsets
 from carts.models import Cart
 from carts.utils import get_user_carts
 from goods.models import Products
+from .serializers import *
 
 
 def cart_add(request):
@@ -89,3 +91,12 @@ def cart_remove(request):
     }
 
     return JsonResponse(response_data)
+
+
+# ---------------- API ----------------
+
+class CartApi(viewsets.ModelViewSet):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer
+
+# ---------------- API ----------------

@@ -6,7 +6,8 @@ from django.shortcuts import redirect, render
 from carts.models import Cart
 from orders.forms import CreateOrderForm
 from orders.models import Order, OrderItem
-
+from rest_framework import viewsets
+from .serializers import *
 
 @login_required
 def create_order(request):
@@ -71,3 +72,17 @@ def create_order(request):
         'orders': True,
     }
     return render(request, 'orders/create_orders.html', context=context)
+
+
+# ---------------- API ----------------
+
+class OrderApi(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+
+class OrderItemApi(viewsets.ModelViewSet):
+    queryset = OrderItem.objects.all()
+    serializer_class = OrderItemSerializer
+
+# ---------------- API ----------------
